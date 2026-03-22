@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phòng Khám Sản Phụ Khoa – BS. CKII. Phan Tín</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --rose:#B5485A;
+  --rose-deep:#8C2F3F;
+  --rose-soft:#E8899A;
+  --blush:#FDF0F2;
+  --blush2:#F7DDE2;
+  --blush3:#FBEAED;
+  --white:#FFFFFF;
+  --bg:#FDFBFB;
+  --ink:#1E0F13;
+  --ink2:#5C3A43;
+  --ink3:#A67C85;
+  --gold:#C9A96E;
+  --border:rgba(181,72,90,0.12);
+  --serif:'Cormorant Garamond','Georgia',serif;
+  --sans:'Jost',ui-sans-serif,system-ui,-apple-system,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);overflow-x:hidden;line-height:1.6;font-weight:300}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:99;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 4rem;height:68px;
+  background:rgba(253,251,251,.95);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:box-shadow .3s;
+}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo-emblem{
+  width:38px;height:38px;border-radius:50%;
+  border:1.5px solid var(--rose-soft);
+  display:flex;align-items:center;justify-content:center;
+}
+.logo-emblem svg{width:16px;height:16px;stroke:var(--rose);fill:none;stroke-width:1.5}
+.logo-name{font-family:var(--serif);font-size:1.05rem;font-weight:400;color:var(--ink);letter-spacing:.02em;line-height:1.2}
+.logo-name small{display:block;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink3);font-family:var(--sans);font-weight:300}
+nav ul{list-style:none;display:flex;gap:2.5rem;align-items:center}
+nav ul a{text-decoration:none;font-size:.75rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);transition:color .25s}
+nav ul a:hover{color:var(--rose)}
+.nav-cta{border:1px solid var(--rose)!important;color:var(--rose)!important;padding:.42rem 1.1rem;transition:all .25s!important}
+.nav-cta:hover{background:var(--rose)!important;color:#fff!important}
+
+/* HERO */
+#hero{min-height:100vh;padding-top:68px;display:grid;grid-template-columns:55% 45%}
+.hero-left{
+  padding:5rem 3.5rem 4rem 4rem;
+  display:flex;flex-direction:column;justify-content:center;position:relative;
+}
+.hero-ornament{
+  position:absolute;top:90px;left:10px;
+  font-family:var(--serif);font-size:16rem;font-weight:300;font-style:italic;
+  color:rgba(181,72,90,.04);line-height:1;pointer-events:none;user-select:none;
+}
+.hero-kicker{display:flex;align-items:center;gap:.75rem;margin-bottom:1.75rem;opacity:0;animation:up .8s .15s forwards}
+.kicker-line{width:32px;height:1px;background:var(--rose-soft)}
+.kicker-text{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rose);font-weight:400}
+h1{
+  font-family:var(--serif);font-size:clamp(2.8rem,4.5vw,4rem);
+  font-weight:300;line-height:1.1;color:var(--ink);margin-bottom:1.5rem;
+  opacity:0;animation:up .8s .3s forwards;
+}
+h1 em{font-style:italic;color:var(--rose)}
+.hero-desc{
+  font-size:.9rem;color:var(--ink2);line-height:1.9;max-width:420px;
+  margin-bottom:2.25rem;font-weight:300;
+  opacity:0;animation:up .8s .45s forwards;
+}
+.hero-actions{display:flex;gap:1rem;align-items:center;opacity:0;animation:up .8s .6s forwards}
+.btn-primary{
+  background:var(--rose);color:#fff;padding:.82rem 2rem;
+  font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;
+  text-decoration:none;border:none;cursor:pointer;font-family:var(--sans);font-weight:400;
+  transition:background .25s;display:inline-block;
+}
+.btn-primary:hover{background:var(--rose-deep)}
+.btn-line{
+  font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink2);text-decoration:none;
+  display:flex;align-items:center;gap:.6rem;transition:color .25s;font-weight:400;
+}
+.btn-line::after{content:'→';transition:transform .25s}
+.btn-line:hover{color:var(--rose)}
+.btn-line:hover::after{transform:translateX(4px)}
+.hero-stats{
+  margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);
+  display:flex;gap:2.5rem;opacity:0;animation:up .8s .75s forwards;
+}
+.stat-item .snum{font-family:var(--serif);font-size:2rem;font-weight:400;color:var(--rose);line-height:1}
+.stat-item .slabel{font-size:.68rem;color:var(--ink3);letter-spacing:.06em;margin-top:3px}
+.stat-sep{width:1px;background:var(--border)}
+
+/* HERO RIGHT */
+.hero-right{
+  position:relative;background:var(--blush);overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.hr-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 60% 30%,rgba(181,72,90,.08) 0%,transparent 60%),
+              radial-gradient(ellipse at 20% 80%,rgba(201,169,110,.06) 0%,transparent 50%);
+}
+.portrait-wrap{
+  position:relative;z-index:1;padding:3rem;width:100%;
+  display:flex;align-items:center;justify-content:center;
+}
+.portrait{
+  width:100%;max-width:320px;aspect-ratio:3/4;
+  background:linear-gradient(155deg,#f7dde2,#e0b8c3);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  opacity:0;animation:fadeIn .9s .5s forwards;
+}
+.portrait::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(transparent,rgba(30,15,19,.55))}
+.portrait svg{width:140px;opacity:.45;position:relative;z-index:1}
+.portrait-label{
+  position:absolute;bottom:0;left:0;right:0;padding:1.5rem;z-index:2;
+}
+.portrait-label .pn{font-family:var(--serif);font-size:1.2rem;font-weight:400;color:#fff;font-style:italic}
+.portrait-label .pt{font-size:.62rem;letter-spacing:.14em;color:rgba(255,255,255,.65);text-transform:uppercase;margin-top:2px}
+.portrait-card{
+  position:absolute;top:2.5rem;left:-1rem;z-index:2;
+  background:var(--white);padding:1rem 1.25rem;
+  box-shadow:0 12px 36px rgba(30,15,19,.1);
+  border-left:3px solid var(--rose);
+  opacity:0;animation:up .8s .9s forwards;
+}
+.portrait-card .pc-label{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:.25rem}
+.portrait-card .pc-value{font-family:var(--serif);font-size:1.1rem;color:var(--ink);font-style:italic}
+.portrait-badge{
+  position:absolute;bottom:2.5rem;right:-0.5rem;z-index:2;
+  background:var(--rose);color:#fff;padding:.9rem 1.1rem;text-align:center;
+  box-shadow:0 8px 24px rgba(181,72,90,.3);
+  opacity:0;animation:up .8s 1.1s forwards;
+}
+.portrait-badge .pb-big{font-family:var(--serif);font-size:1.9rem;font-weight:400;line-height:1}
+.portrait-badge .pb-sm{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;opacity:.8;margin-top:2px}
+.dot-grid{
+  position:absolute;bottom:1.5rem;left:1.5rem;
+  display:grid;grid-template-columns:repeat(5,1fr);gap:5px;opacity:.15;z-index:1;
+}
+.dot-grid span{width:3px;height:3px;border-radius:50%;background:var(--rose);display:block}
+
+/* DOCTOR SECTION */
+#doctor{background:var(--white);padding:0}
+.doc-inner{display:grid;grid-template-columns:1fr 1fr}
+.doc-photo-col{
+  background:var(--blush3);padding:6rem 4rem;
+  display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+}
+.doc-photo-col::before{
+  content:'';position:absolute;top:-100px;right:-100px;
+  width:350px;height:350px;border-radius:50%;border:1px dashed rgba(181,72,90,.12);
+}
+.doc-photo-col::after{
+  content:'';position:absolute;bottom:-60px;left:-60px;
+  width:220px;height:220px;border-radius:50%;border:1px dashed rgba(201,169,110,.18);
+}
+.doc-photo-frame{
+  width:270px;height:350px;position:relative;z-index:1;
+  background:linear-gradient(145deg,#f7dde2,#dfa8b8);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+}
+.doc-photo-frame::after{content:'';position:absolute;bottom:0;left:0;right:0;height:35%;background:linear-gradient(transparent,rgba(181,72,90,.25))}
+.doc-photo-frame svg{width:120px;opacity:.4}
+.doc-photo-name{position:absolute;bottom:0;left:0;right:0;padding:1.5rem;z-index:1;text-align:center}
+.doc-photo-name .dn{font-family:var(--serif);font-size:1.15rem;color:#fff;font-style:italic}
+.doc-photo-name .dt{font-size:.6rem;letter-spacing:.12em;color:rgba(255,255,255,.65);text-transform:uppercase}
+.doc-ckii{
+  position:absolute;top:2rem;right:-1.5rem;z-index:2;
+  background:var(--rose);color:#fff;padding:1.1rem;text-align:center;
+  box-shadow:0 8px 28px rgba(181,72,90,.3);
+}
+.doc-ckii .ck-big{font-family:var(--serif);font-size:1.9rem;line-height:1}
+.doc-ckii .ck-sm{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;opacity:.8}
+
+.doc-info-col{padding:5.5rem 4.5rem;display:flex;flex-direction:column;justify-content:center}
+.eyebrow{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
+.eyebrow-bar{width:24px;height:1px;background:var(--rose-soft)}
+.eyebrow-lbl{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);font-weight:400}
+.doc-name-lg{font-family:var(--serif);font-size:2.2rem;font-weight:300;color:var(--ink);line-height:1.1;margin-bottom:.4rem}
+.doc-spec{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);font-weight:400;margin-bottom:1.25rem}
+.gold-bar{width:44px;height:1px;background:var(--gold);margin-bottom:1.5rem}
+.doc-bio{font-size:.88rem;color:var(--ink2);line-height:1.9;font-weight:300;margin-bottom:2rem}
+.quals{display:flex;flex-direction:column;gap:.9rem;margin-bottom:2.25rem}
+.qual{display:flex;gap:.85rem;align-items:flex-start}
+.qual-dot{width:5px;height:5px;border-radius:50%;background:var(--rose-soft);flex-shrink:0;margin-top:7px}
+.qual-text{font-size:.84rem;color:var(--ink2);line-height:1.65;font-weight:300}
+
+/* SERVICES */
+#services{background:var(--bg);padding:6rem 4rem}
+.srv-top{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:4rem}
+.srv-desc-p{font-size:.88rem;color:var(--ink2);line-height:1.9;font-weight:300}
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.srv-card{
+  background:var(--white);padding:2.25rem;
+  position:relative;transition:background .25s;cursor:default;overflow:hidden;
+}
+.srv-card::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--rose);transform:scaleX(0);transform-origin:left;transition:transform .35s;
+}
+.srv-card:hover{background:var(--blush3)}
+.srv-card:hover::before{transform:scaleX(1)}
+.srv-n{font-family:var(--serif);font-size:2.8rem;font-weight:300;font-style:italic;color:rgba(181,72,90,.1);line-height:1;margin-bottom:1.1rem}
+.srv-title{font-family:var(--serif);font-size:1.08rem;font-weight:400;color:var(--ink);margin-bottom:.6rem}
+.srv-body{font-size:.8rem;color:var(--ink2);line-height:1.75;font-weight:300}
+.srv-foot{margin-top:1.25rem;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rose);display:flex;align-items:center;gap:.5rem;font-weight:400}
+.srv-foot::before{content:'';width:12px;height:1px;background:var(--rose-soft)}
+
+/* BOOKING */
+#booking{background:var(--white);display:grid;grid-template-columns:1fr 1.1fr;padding:0}
+.book-dark{
+  background:var(--ink);padding:5.5rem 4rem;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.book-dark .eyebrow-bar{background:rgba(181,72,90,.4)}
+.book-dark .eyebrow-lbl{color:var(--rose-soft)}
+.book-dark h2{color:var(--white)}
+.book-dark h2 em{color:var(--rose-soft);font-style:italic}
+.book-dark .gold-bar{background:rgba(201,169,110,.4);margin-bottom:1.25rem}
+.book-desc-p{font-size:.86rem;color:rgba(255,255,255,.45);line-height:1.9;font-weight:300;margin-bottom:2.5rem}
+.ct-items{display:flex;flex-direction:column;gap:1.3rem}
+.ct-item{display:flex;align-items:flex-start;gap:.9rem}
+.ct-item svg{width:15px;height:15px;stroke:var(--rose-soft);fill:none;stroke-width:1.8;flex-shrink:0;margin-top:3px}
+.ct-item-lbl{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.28);font-weight:300}
+.ct-item-val{font-size:.86rem;color:rgba(255,255,255,.75);font-weight:300;margin-top:1px}
+
+.book-form-col{background:var(--blush3);padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center}
+.fh{font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--ink);margin-bottom:.25rem}
+.fsub-lbl{font-size:.72rem;color:var(--ink3);letter-spacing:.05em;margin-bottom:2rem;font-weight:300}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.fg{margin-bottom:.8rem}
+.fg label{display:block;font-size:.62rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:.4rem}
+.fg input,.fg select,.fg textarea{
+  width:100%;padding:.68rem .95rem;
+  background:var(--white);border:1px solid rgba(181,72,90,.14);
+  font-family:var(--sans);font-size:.84rem;font-weight:300;color:var(--ink);
+  outline:none;transition:border-color .2s;appearance:none;border-radius:0;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--rose)}
+.fg textarea{resize:vertical;min-height:82px}
+.f-submit{
+  width:100%;padding:.88rem;border:none;
+  background:var(--rose);color:#fff;
+  font-family:var(--sans);font-size:.72rem;font-weight:400;
+  letter-spacing:.18em;text-transform:uppercase;
+  cursor:pointer;transition:background .25s;
+}
+.f-submit:hover{background:var(--rose-deep)}
+.f-ok{
+  display:none;margin-top:.75rem;padding:.7rem 1rem;
+  background:rgba(181,72,90,.07);border-left:2px solid var(--rose);
+  font-size:.8rem;color:var(--rose);font-weight:400;
+}
+
+/* CONTACT */
+#contact{
+  background:var(--rose);
+  display:grid;grid-template-columns:repeat(3,1fr);
+}
+.ct-strip{
+  padding:2.75rem;text-align:center;
+  border-right:1px solid rgba(255,255,255,.15);
+}
+.ct-strip:last-child{border-right:none}
+.ct-strip-ico{
+  width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.3);
+  display:flex;align-items:center;justify-content:center;margin:0 auto .9rem;
+}
+.ct-strip-ico svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:1.8}
+.ct-strip-lbl{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:.35rem;font-weight:300}
+.ct-strip-val{font-family:var(--serif);font-size:1.05rem;color:#fff;font-style:italic}
+.ct-strip-sub{font-size:.74rem;color:rgba(255,255,255,.6);margin-top:.2rem;font-weight:300}
+
+/* FOOTER */
+footer{
+  background:var(--ink);padding:1.75rem 4rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+.ft-logo-name{font-family:var(--serif);font-size:.95rem;color:rgba(255,255,255,.7)}
+.ft-logo-name small{display:block;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);font-family:var(--sans);font-weight:300;margin-top:1px}
+.ft-copy{font-size:.7rem;color:rgba(255,255,255,.2);font-weight:300}
+.ft-nav{display:flex;gap:2rem}
+.ft-nav a{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.28);text-decoration:none;transition:color .2s;font-weight:300}
+.ft-nav a:hover{color:var(--rose-soft)}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:0 1.5rem}nav ul{gap:1rem}
+  #hero{grid-template-columns:1fr;min-height:auto}
+  .hero-right{height:320px}
+  .hero-left{padding:5.5rem 1.5rem 2.5rem}
+  #doctor,#booking{display:block}
+  .doc-photo-col,.doc-info-col,.book-dark,.book-form-col{padding:3.5rem 1.5rem}
+  #services{padding:4rem 1.5rem}
+  .srv-top{grid-template-columns:1fr}
+  .srv-grid{grid-template-columns:1fr}
+  #contact{grid-template-columns:1fr}
+  .ct-strip{border-right:none;border-bottom:1px solid rgba(255,255,255,.15)}
+  .ct-strip:last-child{border-bottom:none}
+  footer{flex-direction:column;gap:.75rem;text-align:center;padding:1.5rem}
+  .hero-stats{flex-wrap:wrap;gap:1.5rem}
+  .frow{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="logo">
+    <div class="logo-emblem">
+      <svg viewBox="0 0 24 24"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402C1 3.148 4.005 1 7.5 1c2.397 0 4.437 1.26 5.5 2.5C14.063 2.26 16.103 1 18.5 1 22 1 23 3.15 23 7.19c0 4.106-5.37 8.863-11 14.403z"/></svg>
+    </div>
+    <div class="logo-name">BS. CKII. Phan Tín<small>Phòng Khám Sản Phụ Khoa</small></div>
+  </a>
+  <ul>
+    <li><a href="#doctor">Bác Sĩ</a></li>
+    <li><a href="#services">Dịch Vụ</a></li>
+    <li><a href="#booking">Đặt Hẹn</a></li>
+    <li><a href="#contact">Liên Hệ</a></li>
+    <li><a href="#booking" class="nav-cta">Đặt Lịch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-ornament">♥</div>
+    <div class="hero-kicker">
+      <div class="kicker-line"></div>
+      <span class="kicker-text">Phòng Khám Sản Phụ Khoa Chuyên Sâu</span>
+    </div>
+    <h1>Tin tưởng &amp;<br><em>an tâm</em> trong<br>từng hành trình</h1>
+    <p class="hero-desc">Bác sĩ Chuyên khoa II Phan Tín — hơn 20 năm đồng hành cùng phụ nữ Việt Nam qua những giai đoạn quan trọng nhất của cuộc đời, với sự tận tâm và chuyên môn được hàng nghìn bệnh nhân tin tưởng.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn-primary">Đặt Lịch Khám</a>
+      <a href="#doctor" class="btn-line">Giới thiệu bác sĩ</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="snum">20+</div><div class="slabel">Năm kinh nghiệm</div></div>
+      <div class="stat-sep"></div>
+      <div class="stat-item"><div class="snum">5,000+</div><div class="slabel">Bệnh nhân tin tưởng</div></div>
+      <div class="stat-sep"></div>
+      <div class="stat-item"><div class="snum">CKII</div><div class="slabel">Chuyên khoa cấp II</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hr-bg"></div>
+    <div class="portrait-wrap">
+      <div class="portrait">
+        <svg viewBox="0 0 160 200" fill="none">
+          <circle cx="80" cy="65" r="40" fill="rgba(181,72,90,.2)" stroke="rgba(181,72,90,.3)" stroke-width="1.2"/>
+          <path d="M20 180c0-35 27-55 60-55s60 20 60 55" fill="rgba(181,72,90,.15)" stroke="rgba(181,72,90,.25)" stroke-width="1.2"/>
+          <rect x="60" y="108" width="40" height="28" rx="4" fill="rgba(181,72,90,.1)" stroke="rgba(181,72,90,.22)" stroke-width="1"/>
+          <path d="M72 122h16M80 114v16" stroke="rgba(181,72,90,.45)" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <div class="portrait-label">
+          <div class="pn">BS. CKII. Phan Tín</div>
+          <div class="pt">Chuyên Gia Sản Phụ Khoa</div>
+        </div>
+      </div>
+      <div class="portrait-card">
+        <div class="pc-label">Chứng chỉ hành nghề</div>
+        <div class="pc-value">Chuyên khoa II</div>
+      </div>
+      <div class="portrait-badge">
+        <div class="pb-big">20+</div>
+        <div class="pb-sm">Năm kinh nghiệm</div>
+      </div>
+    </div>
+    <div class="dot-grid">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+</section>
+
+<!-- DOCTOR -->
+<section id="doctor">
+  <div class="doc-inner">
+    <div class="doc-photo-col reveal">
+      <div class="doc-photo-frame">
+        <svg viewBox="0 0 160 200" fill="none" style="width:130px;opacity:.42">
+          <circle cx="80" cy="65" r="42" fill="rgba(181,72,90,.25)" stroke="rgba(181,72,90,.4)" stroke-width="1.5"/>
+          <path d="M18 185c0-37 28-58 62-58s62 21 62 58" fill="rgba(181,72,90,.2)" stroke="rgba(181,72,90,.35)" stroke-width="1.5"/>
+          <rect x="58" y="108" width="44" height="30" rx="5" fill="rgba(181,72,90,.12)" stroke="rgba(181,72,90,.28)" stroke-width="1.2"/>
+          <path d="M70 123h20M80 113v20" stroke="rgba(181,72,90,.5)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <div class="doc-photo-name">
+          <div class="dn">BS. CKII. Phan Tín</div>
+          <div class="dt">Chuyên Gia Sản Phụ Khoa</div>
+        </div>
+      </div>
+      <div class="doc-ckii">
+        <div class="ck-big">CKII</div>
+        <div class="ck-sm">Chuyên khoa II</div>
+      </div>
+    </div>
+
+    <div class="doc-info-col">
+      <div class="eyebrow reveal"><div class="eyebrow-bar"></div><span class="eyebrow-lbl">Bác Sĩ Phụ Trách</span></div>
+      <div class="doc-name-lg reveal">BS. CKII. Phan Tín</div>
+      <div class="doc-spec reveal">Chuyên Gia Sản Phụ Khoa · Chuyên Khoa II</div>
+      <div class="gold-bar reveal"></div>
+      <p class="doc-bio reveal">Bác sĩ Chuyên khoa II Phan Tín là chuyên gia có hơn 20 năm kinh nghiệm lâm sàng trong lĩnh vực sản phụ khoa. Từng công tác và giữ vị trí chuyên môn tại các bệnh viện lớn tại TP. Hồ Chí Minh, bác sĩ nổi tiếng với phong cách khám chữa tận tâm, tỉ mỉ và luôn đặt sức khoẻ bệnh nhân lên hàng đầu.</p>
+      <div class="quals reveal">
+        <div class="qual"><div class="qual-dot"></div><span class="qual-text">Bằng Chuyên khoa II – Đại học Y Dược TP. Hồ Chí Minh</span></div>
+        <div class="qual"><div class="qual-dot"></div><span class="qual-text">Hơn 20 năm kinh nghiệm khám và điều trị sản phụ khoa</span></div>
+        <div class="qual"><div class="qual-dot"></div><span class="qual-text">Chuyên sâu siêu âm thai, theo dõi thai kỳ nguy cơ cao</span></div>
+        <div class="qual"><div class="qual-dot"></div><span class="qual-text">Thành viên Hội Sản Phụ Khoa Việt Nam</span></div>
+        <div class="qual"><div class="qual-dot"></div><span class="qual-text">Đào tạo và cập nhật chuyên môn thường xuyên tại các hội nghị quốc tế</span></div>
+      </div>
+      <a href="#booking" class="btn-primary reveal">Đặt Lịch Với Bác Sĩ Tín</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="srv-top">
+    <div class="reveal">
+      <div class="eyebrow"><div class="eyebrow-bar"></div><span class="eyebrow-lbl">Dịch Vụ Khám Chữa</span></div>
+      <h2>Chăm sóc <em>toàn diện</em><br>sức khoẻ phụ nữ</h2>
+      <div class="gold-bar"></div>
+    </div>
+    <p class="srv-desc-p reveal d1">Phòng khám cung cấp đầy đủ dịch vụ sản phụ khoa chuyên sâu — từ theo dõi thai kỳ, siêu âm đến điều trị các bệnh phụ khoa thường gặp — với trang thiết bị hiện đại và quy trình khám chuẩn y khoa.</p>
+  </div>
+  <div class="srv-grid reveal">
+    <div class="srv-card">
+      <div class="srv-n">01</div>
+      <div class="srv-title">Khám Thai & Siêu Âm</div>
+      <p class="srv-body">Theo dõi thai kỳ định kỳ, siêu âm 2D/3D/4D, đánh giá sức khoẻ mẹ và thai nhi trong suốt thai kỳ theo phác đồ chuẩn.</p>
+      <div class="srv-foot">Từ 200,000 đ</div>
+    </div>
+    <div class="srv-card">
+      <div class="srv-n">02</div>
+      <div class="srv-title">Thai Kỳ Nguy Cơ Cao</div>
+      <p class="srv-body">Theo dõi chuyên sâu các trường hợp phức tạp: tiểu đường thai kỳ, tiền sản giật, đa thai, nhau tiền đạo.</p>
+      <div class="srv-foot">Tư vấn trực tiếp</div>
+    </div>
+    <div class="srv-card">
+      <div class="srv-n">03</div>
+      <div class="srv-title">Khám Phụ Khoa Tổng Quát</div>
+      <p class="srv-body">Kiểm tra sức khoẻ phụ khoa định kỳ, tầm soát ung thư cổ tử cung (Pap smear, HPV), siêu âm phụ khoa.</p>
+      <div class="srv-foot">Từ 150,000 đ</div>
+    </div>
+    <div class="srv-card">
+      <div class="srv-n">04</div>
+      <div class="srv-title">Rối Loạn Kinh Nguyệt & Nội Tiết</div>
+      <p class="srv-body">Chẩn đoán và điều trị rối loạn kinh nguyệt, đau bụng kinh, kinh nguyệt không đều, hội chứng tiền kinh nguyệt.</p>
+      <div class="srv-foot">Từ 200,000 đ</div>
+    </div>
+    <div class="srv-card">
+      <div class="srv-n">05</div>
+      <div class="srv-title">Kế Hoạch Hoá Gia Đình</div>
+      <p class="srv-body">Tư vấn biện pháp tránh thai, đặt/tháo vòng tránh thai, tư vấn hiếm muộn và hỗ trợ sinh sản cơ bản.</p>
+      <div class="srv-foot">Từ 100,000 đ</div>
+    </div>
+    <div class="srv-card">
+      <div class="srv-n">06</div>
+      <div class="srv-title">Điều Trị Viêm Nhiễm Phụ Khoa</div>
+      <p class="srv-body">Chẩn đoán và điều trị viêm âm đạo, viêm cổ tử cung, u xơ tử cung, u nang buồng trứng và các bệnh phụ khoa thường gặp.</p>
+      <div class="srv-foot">Từ 200,000 đ</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking" style="padding:0">
+  <div class="book-dark">
+    <div class="eyebrow reveal"><div class="eyebrow-bar"></div><span class="eyebrow-lbl">Đặt Lịch Hẹn</span></div>
+    <h2 class="reveal">Đặt lịch<br><em>trực tuyến</em><br>dễ dàng</h2>
+    <div class="gold-bar reveal"></div>
+    <p class="book-desc-p reveal">Điền thông tin bên cạnh hoặc liên hệ trực tiếp. Lịch hẹn sẽ được xác nhận trong vòng 30 phút trong giờ làm việc.</p>
+    <div class="ct-items reveal">
+      <div class="ct-item">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.7 12.17 19.79 19.79 0 0 1 1.65 3.54 2 2 0 0 1 3.62 1.35h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <div><div class="ct-item-lbl">Điện thoại / Zalo</div><div class="ct-item-val">0901 234 567</div></div>
+      </div>
+      <div class="ct-item">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div><div class="ct-item-lbl">Địa chỉ phòng khám</div><div class="ct-item-val">Số nhà, Tên đường, Quận, TP. HCM</div></div>
+      </div>
+      <div class="ct-item">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div><div class="ct-item-lbl">Giờ làm việc</div><div class="ct-item-val">T2–T6: 8:00–17:00 · T7: 8:00–12:00</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="book-form-col reveal">
+    <div class="fh">Đăng Ký Khám</div>
+    <div class="fsub-lbl">Xác nhận trong 30 phút · Miễn phí tư vấn ban đầu</div>
+    <div class="frow">
+      <div class="fg"><label>Họ và tên</label><input type="text" id="fn" placeholder="Nguyễn Thị A"></div>
+      <div class="fg"><label>Số điện thoại</label><input type="tel" id="fp" placeholder="0901 234 567"></div>
+    </div>
+    <div class="frow">
+      <div class="fg"><label>Năm sinh</label><input type="text" id="fy" placeholder="1990"></div>
+      <div class="fg">
+        <label>Dịch vụ cần khám</label>
+        <select id="fs">
+          <option value="">— Chọn dịch vụ —</option>
+          <option>Khám thai & Siêu âm</option>
+          <option>Thai kỳ nguy cơ cao</option>
+          <option>Khám phụ khoa tổng quát</option>
+          <option>Rối loạn kinh nguyệt</option>
+          <option>Kế hoạch hoá gia đình</option>
+          <option>Viêm nhiễm phụ khoa</option>
+          <option>Khác</option>
+        </select>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fg"><label>Ngày mong muốn</label><input type="date" id="fd"></div>
+      <div class="fg"><label>Buổi khám</label><select id="ft"><option>Sáng (8:00–12:00)</option><option>Chiều (13:00–17:00)</option></select></div>
+    </div>
+    <div class="fg"><label>Triệu chứng / Ghi chú</label><textarea id="fnote" placeholder="Mô tả ngắn triệu chứng hoặc lý do cần khám..."></textarea></div>
+    <button class="f-submit" onclick="doBook()">Gửi Đăng Ký Khám</button>
+    <div class="f-ok" id="okMsg">✓ Đã nhận thông tin. Chúng tôi sẽ liên hệ xác nhận lịch hẹn sớm nhất.</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div id="contact">
+  <div class="ct-strip">
+    <div class="ct-strip-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.7 12.17 19.79 19.79 0 0 1 1.65 3.54 2 2 0 0 1 3.62 1.35h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+    <div class="ct-strip-lbl">Điện Thoại / Zalo</div>
+    <div class="ct-strip-val">0901 234 567</div>
+    <div class="ct-strip-sub">Gọi hoặc nhắn Zalo trong giờ hành chính</div>
+  </div>
+  <div class="ct-strip">
+    <div class="ct-strip-ico"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+    <div class="ct-strip-lbl">Địa Chỉ</div>
+    <div class="ct-strip-val">Số nhà, Tên đường</div>
+    <div class="ct-strip-sub">Quận / Huyện, TP. Hồ Chí Minh</div>
+  </div>
+  <div class="ct-strip">
+    <div class="ct-strip-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+    <div class="ct-strip-lbl">Giờ Làm Việc</div>
+    <div class="ct-strip-val">Thứ 2 — Thứ 7</div>
+    <div class="ct-strip-sub">8:00–17:00 · Thứ 7 đến 12:00</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="logo">
+    <div class="logo-emblem" style="border-color:rgba(181,72,90,.25)">
+      <svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:rgba(181,72,90,.5);fill:none;stroke-width:1.5"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402C1 3.148 4.005 1 7.5 1c2.397 0 4.437 1.26 5.5 2.5C14.063 2.26 16.103 1 18.5 1 22 1 23 3.15 23 7.19c0 4.106-5.37 8.863-11 14.403z"/></svg>
+    </div>
+    <div class="ft-logo-name">BS. CKII. Phan Tín<small>Phòng Khám Sản Phụ Khoa</small></div>
+  </a>
+  <div class="ft-copy">© 2025 Phòng Khám BS. CKII. Phan Tín · Bảo lưu mọi quyền</div>
+  <nav class="ft-nav">
+    <a href="#doctor">Bác Sĩ</a>
+    <a href="#services">Dịch Vụ</a>
+    <a href="#booking">Đặt Hẹn</a>
+    <a href="#contact">Liên Hệ</a>
+  </nav>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(e=>{
+  e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('in');obs.unobserve(el.target)}})
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').style.boxShadow=
+    window.scrollY>40?'0 4px 24px rgba(30,15,19,.06)':'none';
+});
+
+function doBook(){
+  const n=document.getElementById('fn').value.trim();
+  const p=document.getElementById('fp').value.trim();
+  if(!n||!p){alert('Vui lòng nhập họ tên và số điện thoại.');return}
+  document.getElementById('okMsg').style.display='block';
+  const b=document.querySelector('.f-submit');
+  b.disabled=true;b.style.opacity='.4';
+}
+const d=document.getElementById('fd');
+if(d)d.min=new Date().toISOString().split('T')[0];
+</script>
+</body>
+</html>
